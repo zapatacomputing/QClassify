@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{amssymb,amsmath}
+\input{Qcircuit}
+
+\begin{document}
+
+\[
+\Qcircuit @C=1.0em @R=.7em {
+\lstick{|0\rangle} & \gate{X_{\theta_0}} & \ctrl{1} & \gate{X_{w_0}} &  \meter \\
+\lstick{|0\rangle} & \gate{X_{\theta_1}} & \gate{Z} \gategroup{2}{2}{2}{2}{0.8em}{_\}} & \gate{X_{w_1}} \gategroup{1}{3}{2}{4}{0.7em}{--} & \qw \\
+& \\
+& {E(\boldsymbol\theta)} & {\quad\qquad U({\bf w})}
+}
+\]
+
+\end{document}
