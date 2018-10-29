@@ -1,2 +1,1 @@
-# Quantum neural network
-Implementing quantum neural networks on Rigetti machine
+# Variational quantum circuit classifier
