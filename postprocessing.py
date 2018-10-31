@@ -20,5 +20,7 @@ def measure_top0(qubit_chosen):
 		Measurement operation.
 	"""
 
+	out = Program()
 	ro = out.declare('ro', memory_type='BIT', memory_size=1)
-	return MEASURE(qubit_chosen, ro[0])
+	out = out + MEASURE(qubit_chosen, ro[0])
+	return out

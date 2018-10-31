@@ -44,9 +44,23 @@ class QProcessor(object):
 
 		"""
 		
+		self.qubits_chosen = qubits_chosen	
 		self.processor = options['proc_circ']
 		self.postprocessing = options['postprocessing']
-		self.params = params
-		self.circuit = self.processor(params, nqubits)+\
-				self.postprocessing(qubits_chosen[0])
 
+	def circuit(self, params):
+		
+		"""
+		Generates the circuit for a given parameter assignment.
+
+                Args:
+                        params: list[float]
+                                A list of parameters used for the processing
+                                circuit.
+		"""
+
+		self.params = params
+		self.circuit = self.processor(params, self.qubits_chosen)+\
+				self.postprocessing(self.qubits_chosen[0])
+
+		return self.circuit

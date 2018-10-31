@@ -12,17 +12,12 @@ class QClassifier(object):
 		'proc_options':QProcessor.QPROC_OPTIONS_DEFAULT,
 	}
 
-	def __init__(self, input_vec, params, qubits_chosen,\
-		options=QCLASSIFIER_OPTIONS_DEFAULT):
+	def __init__(self, qubits_chosen, options=QCLASSIFIER_OPTIONS_DEFAULT):
 
 		"""
 		Initializes an instance of quantum classifier.
 
 		Args:
-			input_vec: list[float]
-				A vector of input data.
-			params: list[float]
-				A vector of parameters for the processor.
 			qubits_chosen: list[int]
 				List of indices for the qubits that the circuit
                                 acts on.
@@ -35,11 +30,24 @@ class QClassifier(object):
 		self.qencoder_options = options['encoder_options']
 		self.qproc_options = options['proc_options']
 
-		self.qencoder = QEncoder(input_vec,\
-					self.qubits_chosen,\
+	def circuit(self, input_vec, params):
+
+		"""
+		Generates the quantum circuit for the classifier.
+
+		Args:
+                        input_vec: list[float]
+                                A vector of input data.
+                        params: list[float]
+                                A vector of parameters for the processor.
+		"""
+
+		self.qencoder = QEncoder(self.qubits_chosen,\
 					self.qencoder_options)
-		self.qproc = QProcessor(params,\ 
-					self.qubits_chosen,\
+		self.qproc = QProcessor(params, self.qubits_chosen,\
 					self.qproc_options)
 
-		self.circuit = self.qencoder.circuit + self.qproc.circuit	
+		self.circuit = self.qencoder.circuit(input_vec) +\
+			self.qproc.circuit(params)
+
+		return self.circuit	

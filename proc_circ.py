@@ -54,14 +54,18 @@ def layer_xz(params, qubits_chosen, options=LAYER_XZ_OPTIONS_DEFAULT):
 	nlayers = options['nlayers']
 	dist = options['dist']
 
+	# iterate through the layers
 	for i in range(0, nlayers):
+
+		# controlled-z gate layer
 		out = out + layer_controlled_z(qubits_chosen, dist)
-		for j in range(0, len(qubits_chosen)):
-			out = out + layer_single_x(params, qubits_chosen)
+
+		# single-x gate layer
+		out = out + layer_single_x(params, qubits_chosen)
 
 	return out
 
-def layer_single_x(params, qubits_chosen)
+def layer_single_x(params, qubits_chosen):
 
 	"""
 	A layer of single X rotations.
@@ -77,13 +81,13 @@ def layer_single_x(params, qubits_chosen)
 		A pyquil Program object representing the circuit layer.
 	"""
 
-	out = Program()
+	output = Program()
 	nqubits = len(qubits_chosen)
 
 	for i in range(0, nqubits):
-		out = out + Program(RX(params[i], qubits_chosen[i])
+		output = output + Program(RX(params[i], qubits_chosen[i]))
 
-	return out
+	return output
 
 def layer_controlled_z(qubits_chosen, distance):
 
@@ -104,6 +108,9 @@ def layer_controlled_z(qubits_chosen, distance):
 
 	out = Program()
 	nqubits = len(qubits_chosen)
+
+	if nqubits == 2:
+		return Program(CZ(qubits_chosen[0], qubits_chosen[1]))
 
 	for i in range(0, nqubits):
 		out = out + Program(CZ(qubits_chosen[i],\

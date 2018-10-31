@@ -11,20 +11,16 @@ class QEncoder(object):
 	# Default setting for the quantum encoder. See __init__ for detailed
 	# explanations
 	QENCODER_OPTIONS_DEFAULT={
-		'preprocessing':normalize, 	# see preprocessing.py
+		'preprocessing':id_func, 	# see preprocessing.py
 		'encoding_circ':x_product,     	# see encoding_circ.py
 	}
 
-	def __init__(self, input_vec, qubits_chosen,\
-			options=QENCODER_OPTIONS_DEFAULT):
+	def __init__(self, qubits_chosen, options=QENCODER_OPTIONS_DEFAULT):
 
 		"""
 		Initializes an instance of quantum encoder.
 
 		Args:
-			input_vec: list[float]
-				An input vector representing the classical data
-				point to be encoded.
 			qubits_chosen: list[int]
 				List of indices for the qubits that the circuit
 				acts on.
@@ -43,7 +39,23 @@ class QEncoder(object):
 
 		"""
 
+		self.qubits_chosen = qubits_chosen
 		self.preprocessor = options['preprocessing']
 		self.generator = options['encoding_circ']
-		self.input_vec = self.preprocessor(input_vec, qubits_chosen)
-		self.circuit = self.generator(self.input_vec)
+
+	def circuit(self, input_vec):
+
+		"""
+		Generates the circuit for a particular input vector.
+
+		Args:
+			input_vec: list[float]
+				An input vector representing the classical data
+				point to be encoded.
+
+		"""
+
+		self.__input_vec = self.preprocessor(input_vec)
+		self.circuit = self.generator(self.__input_vec,\
+					self.qubits_chosen)
+		return self.circuit
