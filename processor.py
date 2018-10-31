@@ -47,5 +47,6 @@ class QProcessor(object):
 		self.processor = options['proc_circ']
 		self.postprocessing = options['postprocessing']
 		self.params = params
-		self.circuit = self.processor(params, nqubits)
+		self.circuit = self.processor(params, nqubits)+\
+				self.postprocessing(qubits_chosen[0])
 
