@@ -2,6 +2,8 @@ from scipy.optimize import minimize
 from numpy.random import uniform
 from math import pi
 
+import matplotlib.pyplot as plt
+from matplotlib import cm
 from pyquil.api import get_qc
 
 from encoder import *
@@ -45,7 +47,7 @@ class QClassifier(object):
 	def circuit(self, input_vec, params):
 
 		"""
-		Generates the quantum circuit for the classifier.
+		Generates and updates the quantum circuit for the classifier.
 
 		Args:
                         input_vec: list[float]
@@ -109,7 +111,7 @@ class QClassifier(object):
 		'objective_func':crossentropy,	# See training.py
 		'training_method':'nelder-mead',
 		'init_params':[3.0672044712460114, 3.3311348339721203],
-		'maxiter':5,
+		'maxiter':6,
 		'xatol':1e-3,
 		'fatol':1e-3,
 		'verbose':True		# Print intermediate values
@@ -140,10 +142,15 @@ class QClassifier(object):
 				training method employed.
 		"""
 
-		training_data = options['training_data']
-		objective_func = options['objective_func']
-		training_method = options['training_method']
-		init_params = options['init_params']
+		self.training_data = options['training_data']
+		self.objective_func = options['objective_func']
+		self.training_method = options['training_method']
+		self.init_params = options['init_params']
+
+		training_data = self.training_data
+		objective_func = self.objective_func
+		training_method = self.training_method
+		init_params = self.init_params
 
 		# Wrapper for the optimization
 		def targetfunc(params):
@@ -210,4 +217,89 @@ class QClassifier(object):
 						'fatol': fatol})
 
 		# Update the optimized parameters
-		self.params = res.x		
+		self.params = res.x
+
+	plot_db_options = {
+		'nmesh':5,	# number of grid points
+		'xmin':-pi,	# boundary
+		'xmax':pi,
+		'ymin':-pi/2,
+		'ymax':3*pi/2
+	}
+
+	def plot_decision_boundary(self, input_vec, features_chosen, filename,\
+					options=plot_db_options):
+
+		"""
+		For a pair of features, plot the decision boundary of the
+		classifier at its current setting.
+
+		Args:
+			input_vec: list[float]
+				List of floats representing the features of a
+				data point.
+			features_chosen: list[int]
+				List of indices of the two features chosen for
+				the plot.
+			filename: string
+				Name of the exported file for the plot. This
+				includes file name extensions.
+			options: dictionary
+				More information specifying the plot, including
+				nmesh: int
+					Number of grid points in each dimension
+					for generating the plot.
+				xmin, xmax, ymin, ymax: float
+					Range of the plot along each axis.
+		"""
+
+		nmesh = options['nmesh']
+		xmin = options['xmin']
+		xmax = options['xmax']
+		ymin = options['ymin']
+		ymax = options['ymax']
+
+		rangex = np.linspace(xmin, xmax, nmesh)
+		rangey = np.linspace(ymin, ymax, nmesh)
+
+		range_inputs = []
+		func_vals = []
+
+		for y in rangey:
+			for x in rangex:
+				range_inputs = range_inputs + [[x,y]]
+				input_vec[features_chosen[0]] = x
+				input_vec[features_chosen[1]] = y
+				self.circuit(input_vec, self.params)
+				func_vals = func_vals + [self.execute()]
+
+		# Plot the decision boundaries
+		x = list(np.kron(rangey, [1 for i in range(0, nmesh)]))
+		X, Y = np.meshgrid(rangex, rangey)
+		Z = np.reshape(func_vals, [nmesh, nmesh])
+
+		levels = np.arange(-3.5, 3.5, 0.1)
+		norm = cm.colors.Normalize(vmax=abs(Z).max(),\
+					vmin=-abs(Z).max())
+		cmap = cm.PRGn
+		plt.contourf(X, Y, Z, levels,\
+			cmap=cm.get_cmap(cmap, len(levels) - 1), norm=norm)
+
+		# Plot sets with different labels
+		training_data = self.train_options['training_data']
+		group0 = [x[0] for x in training_data if x[1]==0]
+		group1 = [x[0] for x in training_data if x[1]==1] 
+
+		plt.scatter([x[0] for x in group0], [x[1] for x in group0],\
+			c="r")
+		plt.scatter([x[0] for x in group1], [x[1] for x in group1],\
+			c="b")
+
+		plt.rc('text', usetex=True)
+		plt.rc('font', family='serif')
+
+		plt.xlabel(r'$\theta_0$',fontsize=16)
+		plt.ylabel(r'$\theta_1$',fontsize=16)
+
+		plt.savefig(filename)
+		plt.show()
