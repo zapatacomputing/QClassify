@@ -16,10 +16,13 @@ Features
 The implementation allows for modular design of the following components of a variational classifier: 
 
 1. *Encoder*: transforms a classical data vector into a quantum state.
+
     1.1 *Classical preprocessor*: maps an input data vector to circuit parameters.
+    
     1.2 *Quantum state preparation*: applies the parametrized circuit to an all-zero input state to generate a quantum state encoding the input data.
     
 2. *Processor*: extracts information from the encoded quantum state.
+
     2.1 *Quantum state transformation*: applies a parametrized circuit to the encoded quantum state to transform it into a form more amenable for information extraction by measurement and classical postprocessing.
     
     2.2 *Information extraction*: extract classical information from the output quantum state
