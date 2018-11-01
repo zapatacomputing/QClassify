@@ -2,12 +2,14 @@
 QClassify
 =========
 
+
 Description
 ===========
 
-QClassify is a Python framework for implementing variational quantum classifiers. The goal is to provide a generally customizable way of performing classification tasks using gate-model quantum devices. The quantum devices can be either simulated by a quantum simulator or a cloud-based quantum processor accessible via Rigetti Computing's `Quantum Cloud Services <https://www.rigetti.com/qcs>`__.
+QClassify is a Python framework for implementing variational quantum classifiers. The goal is to provide a generally customizable way of performing classification tasks using gate-model quantum devices. The quantum devices can be either executed on a quantum simulator or a cloud-based quantum processor accessible via Rigetti Computing's `Quantum Cloud Services <https://www.rigetti.com/qcs>`__.
 
-Variational quantum classification is a paradigm of supervised quantum machine learning that has been investigated actively in the quantum computing community (See for instance `Farhi and Neven <https://arxiv.org/abs/1802.06002>`__, `Schuld et al. <https://arxiv.org/abs/1804.00633>`__, `Mitarai et al. <https://arxiv.org/abs/1803.00745>`__, and `Havlicek et al. <https://arxiv.org/abs/1804.11326>`__). 
+Variational quantum classification is a paradigm of supervised quantum machine learning that has been actively investigated in the quantum computing community (See for instance `Farhi and Neven <https://arxiv.org/abs/1802.06002>`__, `Schuld et al. <https://arxiv.org/abs/1804.00633>`__, `Mitarai et al. <https://arxiv.org/abs/1803.00745>`__, and `Havlicek et al. <https://arxiv.org/abs/1804.11326>`__). 
+
 
 Features
 --------
@@ -21,7 +23,7 @@ The implementation allows for modular design of the following components of a va
 * Processor: extracts classical information from the encoded quantum state.
     - Quantum state transformation: applies a parametrized circuit to the encoded quantum state to transform it into a form more amenable for information extraction by measurement and classical postprocessing.
     - Information extraction: extract classical information from the output quantum state
-        + Measurement: repeatedly run the quantum circuit, perform measurements and collect measurement statistics
+        + Measurement: repeatedly run the quantum circuit, perform measurements, and collect measurement statistics
         + Classical postprocessing: Glean information from the measurement statistics and produce the output label of the quantum classifier.
 
 
@@ -78,5 +80,4 @@ When using QClassify for research projects, please cite:
 Authors
 =======
 
-`Yudong Cao <https://github.com/yudongcao>`__ , `Zapata Computing, Inc. <https://zapatacomputing.com/>`__,
-`Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard)
+`Yudong Cao <https://github.com/yudongcao>`__, `Zapata Computing, Inc. <https://zapatacomputing.com/>`__, `Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard)
