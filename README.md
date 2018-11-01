@@ -1,1 +1,0 @@
-# Variational quantum circuit classifier

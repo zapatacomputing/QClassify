@@ -2,7 +2,6 @@
 QClassify
 =========
 
-
 Description
 ===========
 
@@ -18,6 +17,7 @@ The implementation allows for modular design of the following components of a va
 * Encoder: transforms a classical data vector into a quantum state.
     - Classical preprocessor: maps an input data vector to circuit parameters.
     - Quantum state preparation: applies the parametrized circuit to an all-zero input state to generate a quantum state encoding the input data.
+
 * Processor: extracts classical information from the encoded quantum state.
     - Quantum state transformation: applies a parametrized circuit to the encoded quantum state to transform it into a form more amenable for information extraction by measurement and classical postprocessing.
     - Information extraction: extract classical information from the output quantum state
@@ -41,7 +41,7 @@ To instead install QCompress from source, clone this repository, ``cd`` into it,
 
 .. code-block:: bash
 
-	git clone https://github.com/hsim13372/QCompress
+	git clone https://github.com/zapatacomputing/QClassify
 	cd QClassify
 	python -m pip install -e .
 
@@ -79,4 +79,4 @@ Authors
 =======
 
 `Yudong Cao <https://github.com/yudongcao>`__ , `Zapata Computing, Inc. <https://zapatacomputing.com/>`__
-`Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard), `Zapata Computing, Inc. <https://zapatacomputing.com/>`__
+`Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard)
