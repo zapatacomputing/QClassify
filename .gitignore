@@ -105,3 +105,6 @@ venv.bak/
 
 # DS_Store
 .DS_Store
+
+# Swap files
+.*.swp
