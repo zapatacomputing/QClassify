@@ -7,7 +7,7 @@ Description
 
 QClassify is a Python framework for implementing variational quantum classifiers. The goal is to provide a generally customizable way of performing classification tasks using gate-model quantum devices. The quantum devices can be either simulated by a quantum simulator or a cloud-based quantum processor accessible via Rigetti Computing's `Quantum Cloud Services <https://www.rigetti.com/qcs>`__.
 
-Variational quantum classification is a paradigm of supervised quantum machine learning that has been investigated actively in the quantum computing community (See for instance `Farhi and Neven <https://arxiv.org/abs/1802.06002>`__, `Schuld et al. <https://arxiv.org/abs/1804.00633>`__, `Mitarai et al. <https://arxiv.org/abs/1803.00745>`__ and `Havlicek et al. <https://arxiv.org/abs/1804.11326>`__). 
+Variational quantum classification is a paradigm of supervised quantum machine learning that has been investigated actively in the quantum computing community (See for instance `Farhi and Neven <https://arxiv.org/abs/1802.06002>`__, `Schuld et al. <https://arxiv.org/abs/1804.00633>`__, `Mitarai et al. <https://arxiv.org/abs/1803.00745>`__, and `Havlicek et al. <https://arxiv.org/abs/1804.11326>`__). 
 
 Features
 --------
@@ -56,7 +56,7 @@ We provide a Jupyter notebook to demonstrate the utility of QClassify.
 .. csv-table::
    :header: Notebook, Feature(s)
 
-   `qclassify_demo.ipynb <https://github.com/zapatacomputing/QClassify/blob/master/qclassify_demo.ipynb>`__, Uses a simple 2-qubit circuit to learn the XOR dataset. 
+   `qclassify_demo.ipynb <https://github.com/zapatacomputing/QClassify/blob/master/qclassify_demo.ipynb>`__, Uses a simple two-qubit circuit to learn the XOR dataset. 
 
 
 Disclaimer
@@ -78,5 +78,5 @@ When using QClassify for research projects, please cite:
 Authors
 =======
 
-`Yudong Cao <https://github.com/yudongcao>`__ , `Zapata Computing, Inc. <https://zapatacomputing.com/>`__
+`Yudong Cao <https://github.com/yudongcao>`__ , `Zapata Computing, Inc. <https://zapatacomputing.com/>`__,
 `Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard)
