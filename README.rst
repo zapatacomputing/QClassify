@@ -30,7 +30,7 @@ The implementation allows for modular design of the following components of a va
 Installation
 ============
 
-To install QCompress using ``pip``:
+To install QClassify using ``pip``:
 
 .. code-block:: bash
 
@@ -39,7 +39,7 @@ To install QCompress using ``pip``:
 Try executing ``import qclassify`` to test the installation in your terminal.
 
 
-To instead install QCompress from source, clone this repository, ``cd`` into it, and run:
+To instead install QClassify from source, clone this repository, ``cd`` into it, and run:
 
 .. code-block:: bash
 
