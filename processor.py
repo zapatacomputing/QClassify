@@ -13,7 +13,10 @@ class QProcessor(object):
 	# explanations
 	QPROC_OPTIONS_DEFAULT={
 		'proc_circ':layer_xz,	# see proc_circ.py
-		'postprocessing':measure_top0, # see postprocessing.py
+		'postprocessing':{
+			'quantum':measure_top, # see postprocessing.py
+			'classical':prob_one, # see postprocessing.py
+		}
 	}
 
 	def __init__(self, params, qubits_chosen,\
@@ -37,16 +40,24 @@ class QProcessor(object):
 					quantum state encoding the input data
 					into another state which is amenable for
 					further information extraction.
-				postprocessing: function handle
-					Name of a function which extracts 
+				postprocessing: dictionary
+					Set of functions which extract
 					classical information from the output
-					state of the processor.
+					state of the processor. This contains
+					quantum: function handle 
+						The measurement operations.
+					classical: function handle 
+						Any function that processes
+						the measurement outcomes.
 
 		"""
 		
 		self.qubits_chosen = qubits_chosen	
 		self.processor = options['proc_circ']
 		self.postprocessing = options['postprocessing']
+
+		self.quantum_post = self.postprocessing['quantum']
+		self.classical_post = self.postprocessing['classical']
 
 	def circuit(self, params):
 		
@@ -60,7 +71,7 @@ class QProcessor(object):
 		"""
 
 		self.params = params
-		self.circuit = self.processor(params, self.qubits_chosen)+\
-				self.postprocessing(self.qubits_chosen[0])
+		self.qcircuit = self.processor(params, self.qubits_chosen)+\
+				self.quantum_post(self.qubits_chosen[0])
 
-		return self.circuit
+		return self.qcircuit

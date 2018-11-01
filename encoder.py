@@ -56,6 +56,6 @@ class QEncoder(object):
 		"""
 
 		self.__input_vec = self.preprocessor(input_vec)
-		self.circuit = self.generator(self.__input_vec,\
+		self.qcircuit = self.generator(self.__input_vec,\
 					self.qubits_chosen)
-		return self.circuit
+		return self.qcircuit
