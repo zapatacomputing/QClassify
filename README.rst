@@ -78,6 +78,8 @@ When using QClassify for research projects, please cite:
 Authors
 =======
 
-`Yudong Cao <https://github.com/yudongcao>`__ , `Zapata Computing, Inc. <https://zapatacomputing.com/>`__
+`Yudong Cao <https://github.com/yudongcao>`__ ,
 
-`Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard), `Zapata Computing, Inc. <https://zapatacomputing.com/>`__
+`Sukin (Hannah) Sim <https://github.com/hsim13372>`__ (Harvard), 
+
+`Zapata Computing, Inc. <https://zapatacomputing.com/>`__
