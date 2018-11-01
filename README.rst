@@ -20,7 +20,8 @@ The implementation allows for modular design of the following components of a va
     - *Quantum state preparation*: applies the parametrized circuit to an all-zero input state to generate a quantum state encoding the input data.
     
 * *Processor*: extracts classical information from the encoded quantum state.
-    - *Quantum state transformation*: applies a parametrized circuit to the encoded quantum state to transform it into a form more amenable for information extraction by measurement and classical postprocessing.- *Information extraction*: extract classical information from the output quantum state
+    - *Quantum state transformation*: applies a parametrized circuit to the encoded quantum state to transform it into a form more amenable for information extraction by measurement and classical postprocessing.
+    - *Information extraction*: extract classical information from the output quantum state
         + *Measurement*: repeatedly run the quantum circuit, perform measurements and collect measurement statistics
         + *Classical postprocessing*: Glean information from the measurement statistics and produce the output label of the quantum classifier.
 
