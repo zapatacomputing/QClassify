@@ -28,7 +28,7 @@ The implementation allows for modular design of the following components of a va
 Installation
 ============
 
-To install QCompress using ``pip``:
+To install QClassify using ``pip``:
 
 .. code-block:: bash
 
@@ -37,11 +37,11 @@ To install QCompress using ``pip``:
 Try executing ``import qclassify`` to test the installation in your terminal.
 
 
-To instead install QCompress from source, clone this repository, ``cd`` into it, and run:
+To instead install QClassify from source, clone this repository, ``cd`` into it, and run:
 
 .. code-block:: bash
 
-	git clone https://github.com/hsim13372/QCompress
+	git clone https://github.com/zapatacomputing/QClassify
 	cd QClassify
 	python -m pip install -e .
 
@@ -56,7 +56,7 @@ We provide a Jupyter notebook to demonstrate the utility of QClassify.
 .. csv-table::
    :header: Notebook, Feature(s)
 
-   `qclassify_demo.ipynb <https://github.com/zapatacomputing/QClassify/blob/master/qclassify_demo.ipynb>`__, Uses a simple 2-qubit circuit to learn the XOR dataset. 
+   `qclassify_demo.ipynb <https://github.com/zapatacomputing/QClassify/blob/master/qclassify_demo.ipynb>`__, Uses a simple two-qubit circuit to learn the XOR dataset. 
 
 
 Disclaimer
