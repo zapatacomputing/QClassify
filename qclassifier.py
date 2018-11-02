@@ -111,7 +111,7 @@ class QClassifier(object):
 		'objective_func':crossentropy,	# See training.py
 		'training_method':'nelder-mead',
 		'init_params':[3.0672044712460114, 3.3311348339721203],
-		'maxiter':6,
+		'maxiter':20,
 		'xatol':1e-3,
 		'fatol':1e-3,
 		'verbose':True		# Print intermediate values
@@ -295,11 +295,11 @@ class QClassifier(object):
 		plt.scatter([x[0] for x in group1], [x[1] for x in group1],\
 			c="b")
 
-		plt.rc('text', usetex=True)
+		#plt.rc('text', usetex=True)
 		plt.rc('font', family='serif')
 
 		plt.xlabel(r'$\theta_0$',fontsize=16)
 		plt.ylabel(r'$\theta_1$',fontsize=16)
 
-		plt.savefig(filename)
+		#plt.savefig(filename)
 		plt.show()
