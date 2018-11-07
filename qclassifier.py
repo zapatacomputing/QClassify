@@ -220,7 +220,7 @@ class QClassifier(object):
 		self.params = res.x
 
 	plot_db_options = {
-		'nmesh':5,	# number of grid points
+		'nmesh':10,	# number of grid points
 		'xmin':-pi,	# boundary
 		'xmax':pi,
 		'ymin':-pi/2,
@@ -301,5 +301,5 @@ class QClassifier(object):
 		plt.xlabel(r'$\theta_0$',fontsize=16)
 		plt.ylabel(r'$\theta_1$',fontsize=16)
 
-		#plt.savefig(filename)
+		plt.savefig(filename)
 		plt.show()
