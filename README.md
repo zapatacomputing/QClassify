@@ -79,8 +79,7 @@ When using QClassify for research projects, please cite:
 	[arXiv:1810.10576](https://arxiv.org/abs/1810.10576). 2018.
 
 
-Authors
-=======
+## Authors
 
 [Yudong Cao](https://github.com/yudongcao),
 [Sukin (Hannah) Sim](https://github.com/hsim13372) (Harvard)

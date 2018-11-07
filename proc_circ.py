@@ -4,7 +4,7 @@ quantum state into a form suitable for further postprocessing.
 
 Template assumed for each function:
 
-function_name(params, nqubits, nlayers, options)
+function_name(params, qubits_chosen, nlayers, options)
 
 	params: list[float]
 		A list of parameters used for the circuit.

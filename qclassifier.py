@@ -227,7 +227,7 @@ class QClassifier(object):
 		'ymax':3*pi/2
 	}
 
-	def plot_decision_boundary(self, input_vec, features_chosen, filename,\
+	def plot_decision_boundary(self, features_chosen, filename,\
 					options=plot_db_options):
 
 		"""
