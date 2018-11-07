@@ -20,11 +20,17 @@ def crossentropy(training_data_computed):
 		is the output of the classifier.
 	"""
 
+	def log_(input):
+		if input<=0:
+			return log(0.0001)
+		else:
+			return log(input)
+
 	out = 0
 	for tuple in training_data_computed:
 		label = tuple[1]
 		output = tuple[2]
-		out = out + (-label * log(output) - (1-label) * log(1-output))
+		out = out + (-label * log_(output) - (1-label) * log_(1-output))
 	out = out / len(training_data_computed)
 
 	return out
