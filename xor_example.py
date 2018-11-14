@@ -2,7 +2,11 @@
 XOR dataset example.
 """
 
-# Data points labelled 0
+import numpy as np
+
+from math import pi
+
+# Training data points labelled 0
 group0 = [[-1.8014030885341425, 0.07049090664351776],
           [-1.301866318505309, -0.09006021655705085],
           [-1.2995311803877012, 0.17179375194954777],
@@ -14,7 +18,7 @@ group0 = [[-1.8014030885341425, 0.07049090664351776],
           [1.5620769416428386, 3.384965966733096],
           [1.3020823312222616, 3.3163245524916936]]
 
-# Data points labelled 1
+# Training data points labelled 1
 group1 = [[-1.6269012492495667, 2.8732368479226293],
           [-1.5530830764355592, 3.1738353675554416],
           [-1.8513100742724584, 3.2237767325843545],
@@ -26,6 +30,39 @@ group1 = [[-1.6269012492495667, 2.8732368479226293],
           [1.5019812981463012, -0.16369059365023533],
           [1.6204586467622049, -0.10966267374801358]]
 
-def gen_xor():
+XOR_TRAINING_DATA = [(x,0) for x in group0] + [(x,1) for x in group1]
 
-	return [(x,0) for x in group0] + [(x,1) for x in group1]
+# Function which generates XOR-like test data
+def gen_xor(num_points, delta):
+
+	"""
+	Function for generating XOR-like test data.
+
+	Args:
+		num_points: int
+			Number of data points to be generated. Half of them
+			will be labelled 0 and the other half 1.
+		delta: float
+			Range of perturbation. This determines how spread out
+			the data points are.
+
+	Returns:
+		A list of tuples (list, {0,1}) where the list is the feature
+		vector and {0,1} is the label.
+	"""
+
+	Ndata = int(num_points/2) # Number of data points per point group
+	delta = pi/10 # range of perturbation
+	group0 = [[-pi/2 + np.random.uniform(-delta, delta),\
+			np.random.uniform(-delta, delta)]\
+			for x in range(0, Ndata)] +\
+		[[pi/2 + np.random.uniform(-delta,delta),\
+			pi+np.random.uniform(-delta, delta)]\
+			for x in range(0, Ndata)]
+	group1 = [[-pi/2 + np.random.uniform(-delta,delta),\
+			pi+np.random.uniform(-delta, delta)]\
+			for x in range(0, Ndata)] +\
+		[[pi/2 + np.random.uniform(-delta,delta),\
+			np.random.uniform(-delta, delta)]\
+			for x in range(0, Ndata)]
+	return [(x, 0) for x in group0] + [(x, 1) for x in group1]

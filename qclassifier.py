@@ -8,8 +8,10 @@ from pyquil.api import get_qc
 
 from encoder import *
 from processor import *
-from xor_example import *
 from training import *
+
+# Training data set
+from xor_example import *
 
 class QClassifier(object):
 
@@ -94,8 +96,10 @@ class QClassifier(object):
 
 		# Compile circuit
 		qnn_wrapped_circuit = self.qcircuit.wrap_in_numshots_loop(nruns)
-		qnn_native_circuit = forest_cxn.compiler.quil_to_native_quil(qnn_wrapped_circuit)
-		qnn_circuit_executable = forest_cxn.compiler.native_quil_to_executable(qnn_native_circuit)
+		qnn_native_circuit = forest_cxn.compiler.\
+				quil_to_native_quil(qnn_wrapped_circuit)
+		qnn_circuit_executable = forest_cxn.compiler.\
+				native_quil_to_executable(qnn_native_circuit)
 
 		# Execute circuit
 		result = forest_cxn.run(qnn_circuit_executable)
@@ -105,13 +109,51 @@ class QClassifier(object):
 
 		return output
 
+	# setting for testing the classifier on a testing set
+	test_options = {
+		'objective_func': crossentropy, # See training.py
+	}
+
+	def test(self, data_set, options=test_options):
+
+		"""
+		Tests a classifier on a given set of testing data.
+
+		Args:
+			data_set: list[(list,{0,1})]
+				A list of tuples (feature, label) where feature
+				is a list of floats describing the data vector
+				and label is a discrete output value which is
+				0 or 1.
+			options: dictionary
+				More information about the testing process.
+				Entries include
+				objective_func: function handle
+                                        Function which evaluates how well the
+                                        classifier performs on the data set.
+		"""
+
+		objective_func = options['objective_func']
+
+		data_computed = []
+		for i, tuple in enumerate(data_set):
+                        input_vec = tuple[0]
+                        self.circuit(input_vec, self.params)
+                        output = self.execute()
+                        new_tuple = (input_vec, tuple[1], output)
+                        data_computed.append(new_tuple)
+
+		out = objective_func(data_computed)
+                
+		return out
+
 	# settings for training the variational classifier
 	train_options={
-		'training_data':gen_xor(),	# Example. See xor_example.py
+		'training_data':XOR_TRAINING_DATA, # Example. See xor_example.py
 		'objective_func':crossentropy,	# See training.py
 		'training_method':'nelder-mead',
 		'init_params':[3.0672044712460114, 3.3311348339721203],
-		'maxiter':6,
+		'maxiter':20,
 		'xatol':1e-3,
 		'fatol':1e-3,
 		'verbose':True		# Print intermediate values
@@ -154,15 +196,8 @@ class QClassifier(object):
 
 		# Wrapper for the optimization
 		def targetfunc(params):
-			training_data_computed = []		
-			for i, tuple in enumerate(training_data):
-				input_vec = tuple[0]
-				self.circuit(input_vec, params)
-				output = self.execute()
-				new_tuple = (input_vec, tuple[1], output)
-				training_data_computed.append(new_tuple)
-			out = objective_func(training_data_computed)
-			return out
+			self.params = params
+			return self.test(training_data)
 
 		# Callback function for displaying progress
 		self.Nfeval = 1
@@ -219,16 +254,18 @@ class QClassifier(object):
 		# Update the optimized parameters
 		self.params = res.x
 
+	# setting for plotting decision boundary of the classifier for a chosen
+	# pair of features (limited to 2D plots)
 	plot_db_options = {
-		'nmesh':5,	# number of grid points
+		'nmesh':10,	# number of grid points
 		'xmin':-pi,	# boundary
 		'xmax':pi,
 		'ymin':-pi/2,
 		'ymax':3*pi/2
 	}
 
-	def plot_decision_boundary(self, input_vec, features_chosen, filename,\
-					options=plot_db_options):
+	def plot_decision_boundary(self, input_vec, features_chosen,\
+					filename, options=plot_db_options):
 
 		"""
 		For a pair of features, plot the decision boundary of the
@@ -295,7 +332,7 @@ class QClassifier(object):
 		plt.scatter([x[0] for x in group1], [x[1] for x in group1],\
 			c="b")
 
-		plt.rc('text', usetex=True)
+		#plt.rc('text', usetex=True)
 		plt.rc('font', family='serif')
 
 		plt.xlabel(r'$\theta_0$',fontsize=16)
@@ -303,3 +340,4 @@ class QClassifier(object):
 
 		plt.savefig(filename)
 		plt.show()
+		
