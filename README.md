@@ -62,7 +62,7 @@ We provide a Jupyter notebook to demonstrate the utility of QClassify.
 
 Notebook | Feature(s)
 ---------|---------------
-   [qclassify_demo.ipynb](https://github.com/zapatacomputing/QClassify/blob/master/qclassify_demo.ipynb) | Uses a simple two-qubit circuit to learn the XOR dataset. 
+   [qclassify_demo.ipynb](https://github.com/zapatacomputing/QClassify/blob/master/examples/qclassify_demo.ipynb) | Uses a simple two-qubit circuit to learn the XOR dataset. 
 
 
 ## Disclaimer
