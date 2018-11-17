@@ -1,3 +1,20 @@
+
+##############################################################################
+# Copyright 2018 Yudong Cao and Zapata Computing, Inc.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+##############################################################################
+
 from scipy.optimize import minimize
 from numpy.random import uniform
 from math import pi
@@ -6,12 +23,12 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from pyquil.api import get_qc
 
-from encoder import *
-from processor import *
-from training import *
+from qclassify.encoder import *
+from qclassify.processor import *
+from qclassify.training import *
 
 # Training data set
-from xor_example import *
+from qclassify.xor_example import *
 
 class QClassifier(object):
 
