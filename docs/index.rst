@@ -21,6 +21,7 @@ Contents
 
    intro
    vqc_description
+   qclassify_demo
 
 
 Indices and tables
