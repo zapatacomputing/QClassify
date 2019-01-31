@@ -34,7 +34,7 @@ We provide a Jupyter notebook to demonstrate the utility of QClassify.
 .. csv-table::
    :header: Notebook, Feature(s)
 
-   `qclassify_demo.ipynb <https://github.com/zapatacomputing/QClassify/blob/master/qclassify_demo.ipynb>`__, Uses a simple two-qubit circuit to learn the XOR dataset. 
+   `qclassify_demo.ipynb <https://github.com/zapatacomputing/QClassify/blob/master/examples/qclassify_demo.ipynb>`__, Uses a simple two-qubit circuit to learn the XOR dataset. 
 
 
 How to cite QClassify
