@@ -2,8 +2,8 @@
 # QClassify
 
 .. image:: https://readthedocs.org/projects/qclassify/badge/?version=latest
-	:target: https://qclassify.readthedocs.io/en/latest/?badge=latest
-	:alt: Documentation Status
+:target: https://qclassify.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
 
 ## Description
 
